@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2025 Columbia University, System Level Design Group
+// Copyright (c) 2011-2024 Columbia University, System Level Design Group
 // SPDX-License-Identifier: MIT
 
 inline dma_info_t &dma_info_t::operator=(const dma_info_t &other)
@@ -7,19 +7,20 @@ inline dma_info_t &dma_info_t::operator=(const dma_info_t &other)
     length = other.length;
     size   = other.size;
     user   = other.user;
+    target   = other.target;
     return *this;
 }
 
 inline bool dma_info_t::operator==(const dma_info_t &rhs) const
 {
     return ((rhs.index == index) && (rhs.length == length) && (rhs.size == size) &&
-            (rhs.user == user));
+            (rhs.user == user) && (rhs.target == target));
 }
 
 inline ostream &operator<<(ostream &os, dma_info_t const &dma_info)
 {
     os << "{" << dma_info.index << "," << dma_info.length << "," << dma_info.size << ","
-       << dma_info.user << "}";
+       << dma_info.user << "," << dma_info.target << "}";
     return os;
 }
 
@@ -34,4 +35,6 @@ inline void sc_trace(sc_trace_file *tf, const dma_info_t &v, const std::string &
     sc_trace(tf, v.size, sstm_c.str());
     sstm_c << name << ".user";
     sc_trace(tf, v.user, sstm_c.str());
+    sstm_c << name << ".target";
+    sc_trace(tf, v.target, sstm_c.str());
 }

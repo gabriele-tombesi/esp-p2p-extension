@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2025 Columbia University, System Level Design Group
+// Copyright (c) 2011-2024 Columbia University, System Level Design Group
 // SPDX-License-Identifier: MIT
 
 #ifndef __ESP_DMA_INFO_HPP__
@@ -33,17 +33,20 @@ class dma_info_t {
     // User
     sc_dt::sc_bv<6> user;
 
+    // Target p2p dest
+    sc_dt::sc_bv<6> target;
+
     // Constructors
 
-    dma_info_t() : index(0), length(0), size(SIZE_WORD), user(0) {}
+    dma_info_t() : index(0), length(0), size(SIZE_WORD), user(0), target(0) {}
 
-    dma_info_t(uint32_t i, uint32_t l, sc_dt::sc_bv<3> s, sc_dt::sc_bv<6> u) :
-        index(i), length(l), size(s), user(u)
+    dma_info_t(uint32_t i, uint32_t l, sc_dt::sc_bv<3> s, sc_dt::sc_bv<6> u, sc_dt::sc_bv<6> z) :
+        index(i), length(l), size(s), user(u), target(z)
     {
     }
 
     dma_info_t(const dma_info_t &other) :
-        index(other.index), length(other.length), size(other.size), user(other.user)
+        index(other.index), length(other.length), size(other.size), user(other.user), target(other.target)
     {
     }
 
